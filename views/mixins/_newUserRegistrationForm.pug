@@ -1,0 +1,49 @@
+mixin newUserRegistrationForm(peep = {})
+  
+  .row
+    .col-sm-8.offset-sm-2
+      .card
+        .card-header.text-center.bg-secondary
+          h3.text-white New User Registration
+        .card-body.p-5
+          form(action='/new-registration' method='POST' enctype='multipart/form-data') 
+            .row.mb-3.justify-content-center
+              .col-sm-10.form-group
+                label.mr-2(for='name') Name
+                input.form-control(type='text' name='name' required)
+            .row.mb-3.justify-content-center
+              .col-sm-10.form-group
+                //- Image upload
+                label(for="photo") Photo
+                input.form-control-file(type="file" name="photo" id="photo" accept="image/gif, image/png, image/jpeg")
+                //- if peep.photo
+                //-   img(src=`/images/uploads/userImgs/${peep.photo}`, alt=peep.name width=200)
+            .row.mb-3.justify-content-center
+              .col-sm-10.form-group
+                label.mr-2(for='role') User Role 
+                input.form-control(type='text' name='role')
+            .row.mb-3.justify-content-center
+              .col-sm-10.form-group
+                label.mr-2(for='email') Email
+                input.form-control(type='email' name='email' required) 
+            .row.mb-3.justify-content-center
+              .col-sm-10.form-group
+                label.mr-2(for='password') Password
+                input.form-control(type='password' name='password' required)
+            .row.mb-3.justify-content-center
+              .col-sm-10.form-group
+                label.mr-2(for='password-confirm') Confirm Password
+                input.form-control(type='password' name='password-confirm' required)
+
+            .row.mt-5
+              .col-sm-12
+                input.btn.btn-lg.btn-block.btn-warning.d-flex.justify-content-center.align-items-center(type='submit' value="Register →")
+
+
+          .text-center
+            br
+            a.small.mt-3(href='/user-login')
+              h3 Login Page
+            span &nbsp; | &nbsp;
+            a.small(href='/forgot-password')
+              h3 &nbsp; Forgot Password?

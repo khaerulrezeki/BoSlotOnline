@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  .container-fluid
+    .row.flashes.d-flex.justify-content-center.mt-5
+      if locals.flashes 
+        .row
+          .flash-messages
+            - const categories = Object.keys(locals.flashes)
+            each category in categories
+              each message in flashes[category]
+                .flash(class=`flash--${category}`)
+                  p.flash__text!= message
+                  button.flash__remove(onClick="this.parentElement.remove()") &times;
+
+  .p-0.font-1.content
+      .row.align-items-center.text-center.justify-content-center.my-6
+        .col-sm-6.col-md-5.col-lg-4.col-xl-3
+          .card.p-2
+            .card-title
+              h3.fw-300.mb-5 Reset Password
+            .card-body
+              form( method='POST')
+                input.form-control.mb-3(type='password' placeholder='Password' name='password')
+                input.form-control.mb-3(type='password' placeholder='Confirm Password' name='password-confirm')
+                input.btn.btn-primary.btn-block(type='submit' value='Reset Password →')
+      // /.row
+  // /.container

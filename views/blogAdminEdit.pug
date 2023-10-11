@@ -1,0 +1,51 @@
+extends adminLayout
+
+block content
+  // Page Header
+  header.page-header
+    .container-fluid
+      h2.no-margin-bottom  Edit Blog Posts
+  section.portfolio-admin-options.mt-0
+    .container-fluid
+      .row.flashes.d-flex.justify-content-center
+        if locals.flashes 
+          .row
+            .flash-messages
+              - const categories = Object.keys(locals.flashes)
+              each category in categories
+                each message in flashes[category]
+                  .flash(class=`flash--${category}`)
+                    p.flash__text!= message
+                    button.flash__remove(onClick="this.parentElement.remove()") &times;
+
+      .row.mt-2
+        .col-sm-10.offset-sm-1
+          table.table.table-striped
+            thead.bg-secondary.text-white
+              tr
+                th(scope='col')
+                  h2 Post Title
+                th(scope='col')
+                  h2 Main Photo
+                th(scope='col')
+                  h2 Categories
+                th(scope='col')
+                  h2 Edit
+                th(scope='col')
+                  h2 Delete
+            tbody
+            each post in posts
+              tr
+                th(scope='row')
+                  a(href=`/blog/${post.slug}` target='_blank')
+                    h3 #{post.title}
+                td
+                  img(src=`/images/uploads/postImgs/${post.photo}` width='30')
+                td
+                  each category in post.categories
+                    h4 #{category}
+                    br
+                td
+                  a.btn.btn-primary(href=`/blog-admin/${post._id}/edit`) Edit
+                td
+                  a.btn.btn-primary(href=`/blog-admin/${post._id}/delete`) Delete

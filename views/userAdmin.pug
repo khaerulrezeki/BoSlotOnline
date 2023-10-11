@@ -1,0 +1,44 @@
+extends adminLayout
+
+block content
+  // Page Header
+  header.page-header
+    .container-fluid
+      h2.no-margin-bottom  Edit Users
+  section.portfolio-admin-options.mt-0
+    .container-fluid
+      .row.flashes.d-flex.justify-content-center
+        if locals.flashes 
+          .row
+            .flash-messages
+              - const categories = Object.keys(locals.flashes)
+              each category in categories
+                each message in flashes[category]
+                  .flash(class=`flash--${category}`)
+                    p.flash__text!= message
+                    button.flash__remove(onClick="this.parentElement.remove()") &times;
+
+      .row.mt-2
+        .col-sm-10.offset-sm-1
+          table.table.table-striped
+            thead.bg-secondary.text-white
+              tr
+                th(scope='col')
+                  h2 User Name
+                th(scope='col')
+                  h2 Photo
+                th(scope='col')
+                  h2 Edit
+                th(scope='col')
+                  h2 Delete
+            tbody
+            each user in users
+              tr
+                th(scope='row')
+                    h3 #{user.name}
+                td
+                  img(src=`/images/uploads/userImgs/${user.photo}` width='30')
+                td
+                  a.btn.btn-primary(href=`/user-admin/${user._id}/edit`) Edit
+                td
+                  a.btn.btn-primary(href=`/user-admin/${user._id}/delete`) Delete

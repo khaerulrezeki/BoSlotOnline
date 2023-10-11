@@ -1,0 +1,71 @@
+extends layout
+
+block content
+  .p-5.portfolio-admin-options.mt-0
+    .container-fluid
+      .m-3.row.flashes.d-flex.justify-content-center
+        if locals.flashes 
+          .row
+            .flash-messages
+              - const categories = Object.keys(locals.flashes)
+              each category in categories
+                each message in flashes[category]
+                  .flash(class=`flash--${category}`)
+                    p.flash__text!= message
+                    button.flash__remove(onClick="this.parentElement.remove()") &times;
+  section.py-5.color-white.font-1
+    .background-holder.overlay.py-5(style="background-image:url(/images/siteImages/contact-us.jpg);")  
+    // /.background-holder
+    .container
+      .row.h-half.align-items-center.py-5
+        .col-md-8.col-lg-5
+          h1.fs-3.fs-md-4.mb-3 Contact 
+          p.lead.fs-xs-1 Relax, I've got your back. Feel free to contact me for any support.
+      // /.row
+    // /.container
+  section.font-1
+    .container
+      .row
+        .col-lg-5
+          h3.text-uppercase.fw-300 Contact
+          hr.short.left.mb-5(align="left")
+          .row
+            .col-1
+              span.fa.fa-map-marker
+            .col
+              p.fw-300
+                span.fw-600 Slott HQ
+                br
+                span.color-5 Burlington, NC 27215, USA
+              p.fw-300
+                span.fw-600 Phone: 
+                span.color-5      687-5309
+          .row
+            .col-1
+              span.fa.fa-envelope
+            .col
+              a.fw-300(href="#") boslott@gmail.com
+        .col-lg-7
+          form(action='/contact' method='POST')
+            .form-group
+              input.form-control(type='hidden' name='to' value='username@domain.extension')
+            .form-group
+              input.form-control(type='text' name='name' required='' placeholder='Name')
+            .form-group
+              input.form-control(type='email' name='from' required='' placeholder='Email')
+            .form-group
+              textarea.form-control(rows='8' name='message' placeholder='Message')
+            input.btn.btn-primary(type='submit' name='submit' value='Send!')
+            .zform-feedback.mt-3
+        .col.mt-5
+          p ** Googlemap placeholder **
+          .googlemap(data-latlng="48.8583701,2.2922926" data-scrollwheel="false" data-zoom="14" data-theme="SubtleGray" style="min-height: 400px;")
+            .marker-content.py-3
+              h4 Eiffel Tower
+              p
+                | Gustave Eiffel's iconic,
+                br
+                | wrought-iron 1889 tower.
+      // /.row
+    // /.container
+

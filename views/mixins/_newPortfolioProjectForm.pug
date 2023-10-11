@@ -1,0 +1,134 @@
+mixin newPortfolioProjectForm(project = {})
+  .card
+    .card-header.text-center.bg-secondary
+      h3.text-white Create New Portfolio Project
+    .card-body.p-5
+      form(action=`/portfolio-admin/create/${project._id || ''}` method='POST' enctype="multipart/form-data")
+        .row.mb-3
+          .col-sm-6.form-group
+            label.mr-2(for='name') Project Name
+            input.form-control(type='text' name='name' value=project.name)
+          .col-sm-6.form-group
+            label.mr-2(for='category') Project Category
+            input.form-control(type='text' name='category' value=project.category)
+        .row.mb-5
+          .col-sm-12.form-group
+            //- Image upload
+            label(for="photo") Photo
+            input.form-control-file(type="file" name="photo" id="photo" accept="image/gif, image/png, image/jpeg")
+            if project.photo
+              img(src=`/images/uploads/${project.photo}`, alt=project.name width=200)
+        .row.mb-3
+          .col-sm-10.form-group
+            label(for='miniDescription') Mini Description
+            textarea.w-100.form-control(name='miniDescription')= project.miniDescription
+
+        if project.fullDescriptionParagraphs != undefined && project.fullDescriptionParagraphs.length > 1
+          each paragraph in project.fullDescriptionParagraphs
+            .row.mb-3
+              .col-sm-10.form-group
+                - let labelText = ''
+                - project.fullDescriptionParagraphs.indexOf(paragraph) === 0? labelText = 'Full Description' : labelText = 'Next Paragraph'
+                label(for='fullDescription0') #{labelText}
+                textarea.w-100.form-control(id='fullDescription0' name='fullDescriptionParagraphs' placeholder='First paragraph goes here,  click add button if more paragraph are needed')= paragraph
+              .col-sm-2.d-flex.align-items-center
+                if project.fullDescriptionParagraphs.indexOf(paragraph) === 0
+                  button#addDescrPara.btn.btn-outline-primary.d-flex.justify-content-center.align-items-center(type='button')
+                    i.material-icons.mr-3 add_circle_outline
+                    | Add Paragraph
+        else
+          .row.mb-3
+            .col-sm-10.form-group
+              label(for='fullDescription0') Full Description
+              textarea.w-100.form-control(id='fullDescription0' name='fullDescriptionParagraphs' placeholder='First paragraph goes here,  click add button if more paragraph are needed')= paragraph
+            .col-sm-2.d-flex.align-items-center
+              button#addDescrPara.btn.btn-outline-primary.d-flex.justify-content-center.align-items-center(type='button')
+                i.material-icons.mr-3 add_circle_outline
+                | Add Paragraph
+        .moreParagraphs.row.mb-3
+        .dropdown-divider.my-5
+
+        .row.mb-3
+          .col-sm-6.form-group
+            label(for='clientName') Client Name
+            input.form-control(type='text' name='clientName' value=project.clientName)
+          .col-sm-6.form-group
+            label(for='liveLink') Live Project Link
+            input.form-control(type='text' name='liveLink' value=project.liveLink)
+        .dropdown-divider.my-5
+
+        if project.servicesList != undefined && project.servicesList.length > 1
+          each service in project.servicesList
+            .row.mb-3
+              .col-sm-6.form-group(class=(project.servicesList.indexOf(service) > 0 ? 'ml-3' : ''))
+                label(for='servicesList0') Services List Item
+                input.services.form-control(type='text' id='servicesList0' name='servicesList' value=service)
+              .col-sm-6.d-flex.justify-content-center
+                if project.servicesList.indexOf(service) === 0
+                  button#addServiceInput.btn.btn-outline-primary.d-flex.justify-content-center.align-items-center.w-50(type='button')
+                    i.material-icons.mr-3 add_circle_outline
+                    | Add Service
+        else
+          .row.mb-3
+            .col-sm-6.form-group
+              label(for='servicesList0') Services List Item
+              input.services.form-control(type='text' id='servicesList0' name='servicesList' value=service)
+            .col-sm-6.d-flex.justify-content-center
+              button#addServiceInput.btn.btn-outline-primary.d-flex.justify-content-center.align-items-center.w-50(type='button')
+                i.material-icons.mr-3 add_circle_outline
+                | Add Service
+        .moreServices.row.mb-3
+        .dropdown-divider.my-5
+
+        if project.featuresList != undefined && project.featuresList.length > 1
+          each feature in project.featuresList
+            .row.mb-3
+              .col-sm-6.form-group(class=(project.featuresList.indexOf(feature) > 0 ? 'ml-3' : ''))
+                label(for='featuresList0') Features List Item
+                input.features.form-control(type='text' id='featuresList0' name='featuresList' value=feature)
+              .col-sm-6.d-flex.justify-content-center
+                if project.featuresList.indexOf(feature) === 0
+                  button#addFeatureInput.btn.btn-outline-primary.d-flex.justify-content-center.align-items-center.w-50(type='button')
+                    i.material-icons.mr-3 add_circle_outline
+                    | Add Feature
+        else
+          .row.mb-3
+            .col-sm-6.form-group
+              label(for='featuresList0') Features List Item
+              input.features.form-control(type='text' id='featuresList0' name='featuresList' value=feature)
+            .col-sm-6.d-flex.justify-content-center
+              button#addFeatureInput.btn.btn-outline-primary.d-flex.justify-content-center.align-items-center.w-50(type='button')
+                i.material-icons.mr-3 add_circle_outline
+                | Add Feature
+        .moreFeatures.row.mb-3
+        .dropdown-divider.my-5
+
+        if project.technologiesList != undefined && project.technologiesList.length > 1
+          each technology in project.technologiesList
+            .row.mb-3
+              .col-sm-6.form-group(class=(project.technologiesList.indexOf(technology) > 0 ? 'ml-3' : ''))
+                label(for='technologiesList0') Technologies List Item
+                input.technologies.form-control(type='text' name='technologiesList' id="technologiesList0" value=technology)
+              .col-sm-6.d-flex.justify-content-center
+                if project.technologiesList.indexOf(technology) === 0
+                  button#addTechnologyItem.btn.btn-outline-primary.d-flex.justify-content-center.align-items-center.w-50(type='button')
+                    i.material-icons.mr-3 add_circle_outline
+                    | Add Technology
+        else
+          .row.mb-3
+            .col-sm-6.form-group
+              label(for='technologiesList0') Technologies List Item
+              input.technologies.form-control(type='text' name='technologiesList' id="technologiesList0" value=technology)
+            .col-sm-6.d-flex.justify-content-center
+              button#addTechnologyItem.btn.btn-outline-primary.d-flex.justify-content-center.align-items-center.w-50(type='button')
+                i.material-icons.mr-3 add_circle_outline
+                | Add Technology
+        .moreTechnologies.row.mb-3
+        .dropdown-divider.my-5
+
+        .row.mt-5
+          .col-sm-12
+            button.btn.btn-lg.btn-block.btn-warning.d-flex.justify-content-center.align-items-center(type='submit')
+              | Submit
+              i.material-icons.ml-4 forward
+              

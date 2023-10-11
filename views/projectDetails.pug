@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  section.portfolio.font-1
+    .container
+      .row
+        .col-xl-8
+          h1.fs-3.fs-md-4.mb-4 #{project.name}
+          p.lead.color-5
+            | #{project.miniDescription}
+      .row.mt-5
+        .col.text-center
+          img.radius-primary(src=`/images/uploads/projectImgs/${project.photo}` height='500')
+      .row.mt-8
+        .col-md-6.col-lg-4
+          h5 Client:
+          p.color-5.fw-300 #{project.clientName}
+          .mt-4
+          h6 Project Link:
+          a(href=project.liveLink target='_blank') #{project.liveLink}
+          h5.mt-6
+          //- if (project.servicesList)
+          //-   h5.mt-6 Services Provided:
+          //-   ul.bullet-inside.pl-0.color-5.fw-300.mb-5
+          //-     each service in project.servicesList
+          //-       li #{service}
+          if (project.featuresList)
+            h5 Project Features:
+            ul.bullet-inside.pl-0.color-5.fw-300.mb-5
+              each feature in project.featuresList
+                li #{feature}
+          if (project.technologiesList)
+            h5 Technologies Used:
+            ul.bullet-inside.pl-0.color-5.fw-300.mb-5
+              each technology in project.technologiesList
+                li #{technology}
+
+        .col-md-6.col-lg-7.mt-5.mt-md-0
+          h4 Brief
+          hr.short.left.color-8(align="left")
+          each paragraph in project.fullDescriptionParagraphs
+            p.color-1.fw-300.color-4
+              | #{paragraph}
+ 
+      // /.row
+    // /.container
+
+

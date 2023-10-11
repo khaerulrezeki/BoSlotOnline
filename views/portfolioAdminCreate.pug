@@ -1,0 +1,26 @@
+
+extends adminLayout
+
+include mixins/_newPortfolioProjectForm
+
+block content
+  // Page Header
+  header.page-header
+    .container-fluid
+      h2.no-margin-bottom Create New Project
+  section.portfolio-admin-options.mt-0
+    .container-fluid
+      .row.flashes.d-flex.justify-content-center
+        if locals.flashes 
+          .row
+            .flash-messages
+              - const categories = Object.keys(locals.flashes)
+              each category in categories
+                each message in flashes[category]
+                  .flash(class=`flash--${category}`)
+                    p.flash__text!= message
+                    button.flash__remove(onClick="this.parentElement.remove()") &times;
+
+      .row
+        .col-sm-10.offset-sm-1.portfolio-admin-body
+          +newPortfolioProjectForm(project)

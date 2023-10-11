@@ -1,0 +1,9 @@
+mixin forgotForm()
+  .card.p-2
+    .card-title
+      h3.fw-300.mb-5 Forgot Password
+    .card-body
+      form(action='/account/forgot' method='POST')
+        label(for='email')
+        input.form-control.mb-3(type='email' placeholder='Email' name='email')
+        input.btn.btn-primary.btn-block(type='submit' value='Send a Reset')

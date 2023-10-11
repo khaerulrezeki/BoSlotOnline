@@ -1,0 +1,96 @@
+extends layout
+
+block content
+  section.color-white.font-1
+    .background-holder.overlay.overlay-2(style="background-image:url(/images/siteImages/blog-header.jpg);")  
+    // /.background-holder
+    .container
+      .row.align-items-center.text-center
+        .col-md-12
+          h1.fs-3.fs-md-4 Recent Blogs
+          p
+            strong A small glimpse into my mind ... scary!
+          hr.short
+      // /.row
+    // /.container
+  section.background-11
+    .container
+      .card-columns
+        each post in posts
+          .card.mb-3
+            a(href=`/blog/${post.slug}`)
+              img.card-img-top.w-100(src=`/images/uploads/postImgs/${post.photo}` alt=`${post.title}`)
+            .card-block
+              a.color-2(href=`/blog/${post.slug}`)
+                h5.card-title #{post.title}
+              p.card-text.color-4.fw-300.font-1!= post.body.split(' ').slice(0, 25).join(' ')
+                | &nbsp; ...
+                br
+                br
+                a(href=`/blog/${post.slug}`) Read More
+                
+            .card-footer.background-white
+              .media.align-items-center
+                - const ran = Math.floor(Math.random() * 5) + 1;
+                img.d-flex.mr-3.rounded-circle(src=`/images/siteImages/authors/bo-author${ran}.JPG` alt='Bo Slott Full Stack Webdeveloper' style='max-width: 50px;')
+                .media-body.l-h-0
+                  a.color-1(href=`/blog/${post.slug}`)
+                    h6.mb-0 #{post.author}
+                  - const formatedDate = h.moment(post.createdOn).format('MMM Do YYYY')
+                  span.fs--1.color-5 #{formatedDate}
+
+      
+  //- Pagination to be hooked up when there are enough posts
+      
+      //- nav.font-1.mt-5(aria-label="Page navigation example")
+      //-   ul.pagination.pagination-lg.justify-content-center
+      //-     li.page-item
+      //-       a.page-link(href="#" aria-label="Previous")
+      //-         span(aria-hidden="true") «
+      //-         span.sr-only Previous
+      //-     li.page-item
+      //-       a.page-link(href="#") 1
+      //-     li.page-item.active
+      //-       a.page-link(href="#") 2
+      //-     li.page-item
+      //-       a.page-link(href="#") 3
+      //-     li.page-item
+      //-       a.page-link(href="#") 4
+      //-     li.page-item
+      //-       a.page-link(href="#" aria-label="Next")
+      //-         span(aria-hidden="true") »
+      //-         span.sr-only Next
+      // /.row
+    // /.container
+
+
+  section
+    .background-holder.overlay.overlay-1(style="background-image:url(/images/siteImages/conference-room.jpg);")  
+    // /.background-holder
+    .container
+      .row.font-1.color-white
+        .col
+          h6.mb-2.text-uppercase.ls Like what you've read?
+          h5 Contact me to get started working together
+        .col-md-5.col-lg-4.mt-4.mt-md-0
+          a.btn.btn-primary(href="/contact") Contact Me
+
+      //- Email List Join to be hooked up when email is a feature
+  //- section.text-center
+  //-   .container
+  //-     .row.justify-content-center
+  //-       .col-md-8.col-lg-6
+  //-         h4.color-black.mb-2 Inbox Fresh
+  //-         p.color-3.font-1
+  //-           | Join our mailing list to receive spontaneous newsletters full of lovely treats for eyeballs. We never spam. Ever.
+  //-         form.mt-5.row
+  //-           .col-md-6
+  //-             input.form-control.mb-3(type="text" placeholder="First Name")
+  //-           .col-md-6
+  //-             input.form-control.mb-3(type="text" placeholder="Last Name")
+  //-           .col-12
+  //-             input.form-control.mb-3(type="email" placeholder="Email")
+  //-         .btn.btn-primary.text-uppercase Submit
+      // /.row
+    // /.container
+

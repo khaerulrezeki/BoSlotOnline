@@ -1,0 +1,78 @@
+mixin newBlogPostForm(post = {})
+  .card 
+    .card-header.text-center.bg-secondary
+      h3.text-white Create New Blog Post
+    .card-body.p-5
+      form(action=`/blog-admin/create/${post._id || ''}` method='POST' enctype="multipart/form-data")
+        .row.mb-3
+          .col-sm-12.form-group
+            label.mr-2(for='title') Post Title
+            input.form-control(type='text' name='title' value=post.title)
+        .row.mb-3
+          .col-sm-6.form-group
+            label.mr-2(for='author') Author
+            input.form-control(type='text' name='author' value=post.author) 
+        .row.mb-5
+          .col-sm-12.form-group
+            //- Image upload
+            label(for="photo") Photo
+            input.form-control-file(type="file" name="photo" id="photo" accept="image/gif, image/png, image/jpeg")
+            if post.photo != undefined && post.photo.length
+              img(src=`/images/uploads/postImgs/${post.photo}`, alt=post.title width=200)
+        if post.categories != undefined && post.categories.length > 1
+          each category in post.categories
+            .row.mb-3
+              .col-sm-6.form-group(class=(post.categories.indexOf(category) > 0 ? 'ml-3' : ''))
+                label(for='categories0') Categories
+                input.categories.form-control(type='text' name='categories' id="categories0" value=category)
+              .col-sm-6.d-flex.justify-content-center
+                if post.categories.indexOf(category) === 0
+                  button#addCategory.btn.btn-outline-primary.d-flex.justify-content-center.align-items-center.w-50(type='button')
+                    i.material-icons.mr-3 add_circle_outline
+                    | Add Category
+        else
+          .row.mb-3
+            .col-sm-6.form-group
+              label.mr-2(for='categories0') Categories
+              input.categories.form-control(type='text' name='categories' id='categories0' value=category)
+            .col-sm-6.d-flex.justify-content-center
+              button#addCategory.btn.btn-outline-primary.d-flex.justify-content-center.align-items-center.w-50(type='button')
+                i.material-icons.mr-3 add_circle_outline
+                | Add Category
+        .moreCategories.row.mb-3
+        .dropdown-divider.my-5
+
+        if post.keywords != undefined && post.keywords.length > 1
+          each keyword in post.keywords
+            .row.mb-3
+              .col-sm-6.form-group(class=(post.keywords.indexOf(keyword) > 0 ? 'ml-3' : ''))
+                label(for='keywords0') Keywords
+                input.keywords.form-control(type='text' name='keywords' id="keywords0" value=keyword)
+              .col-sm-6.d-flex.justify-content-center
+                if post.keywords.indexOf(keywords) === 0
+                  button#addKeyword.btn.btn-outline-primary.d-flex.justify-content-center.align-items-center.w-50(type='button')
+                    i.material-icons.mr-3 add_circle_outline
+                    | Add Keyword
+        else
+          .row.mb-3
+            .col-sm-6.form-group
+              label.mr-2(for='keywords0') Keywords
+              input.keywords.form-control(type='text' name='keywords' id='keywords0' value=keyword)
+            .col-sm-6.d-flex.justify-content-center
+              button#addKeyword.btn.btn-outline-primary.d-flex.justify-content-center.align-items-center.w-50(type='button')
+                i.material-icons.mr-3 add_circle_outline
+                | Add Keyword
+        .moreKeywords.row.mb-3
+        .dropdown-divider.my-5 
+
+        .row.mb-3
+          .col-sm-12.form-group
+            label.mr-2(for='body') Post Content
+            textarea#summernote.form-control(name='body')= post.body
+
+        .row.mt-5
+          .col-sm-12
+            button.btn.btn-lg.btn-block.btn-warning.d-flex.justify-content-center.align-items-center(type='submit')
+              | Submit
+              i.material-icons.ml-4 forward
+              

@@ -1,0 +1,107 @@
+// Main Navbar
+header.header
+  nav.navbar
+    // Search Box
+    .search-box
+      button.dismiss
+        i.icon-close
+      form#searchForm(action='#' role='search')
+        input.form-control(type='search' placeholder='What are you looking for...')
+    .container-fluid
+      .navbar-holder.d-flex.align-items-center.justify-content-between
+        // Navbar Header
+        .navbar-header
+          // Navbar Brand
+          a.navbar-brand(href='index.html')
+            .brand-text.brand-big
+              span boslott. 
+              strong Online
+            .brand-text.brand-small
+              strong BS.O
+          // Toggle Button
+          a#toggle-btn.menu-btn.active(href='#')
+            span
+            span
+            span
+        // Navbar Menu
+        ul.nav-menu.list-unstyled.d-flex.flex-md-row.align-items-md-center
+          // Search
+          li.nav-item.d-flex.align-items-center
+            a#search(href='#')
+              i.icon-search
+          // Notifications
+          li.nav-item.dropdown
+            a#notifications.nav-link(rel='nofollow' data-target='#' href='#' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+              i.fa.fa-bell-o
+              span.badge.bg-red 12
+            ul.dropdown-menu(aria-labelledby='notifications')
+              li
+                a.dropdown-item(rel='nofollow' href='#')
+                  .notification
+                    .notification-content
+                      i.fa.fa-envelope.bg-green
+                      | You have 6 new messages
+                    .notification-time
+                      small 4 minutes ago
+              li
+                a.dropdown-item(rel='nofollow' href='#')
+                  .notification
+                    .notification-content
+                      i.fa.fa-twitter.bg-blue
+                      | You have 2 followers
+                    .notification-time
+                      small 4 minutes ago
+              li
+                a.dropdown-item(rel='nofollow' href='#')
+                  .notification
+                    .notification-content
+                      i.fa.fa-upload.bg-orange
+                      | Server Rebooted
+                    .notification-time
+                      small 4 minutes ago
+              li
+                a.dropdown-item(rel='nofollow' href='#')
+                  .notification
+                    .notification-content
+                      i.fa.fa-twitter.bg-blue
+                      | You have 2 followers
+                    .notification-time
+                      small 10 minutes ago
+              li
+                a.dropdown-item.all-notifications.text-center(rel='nofollow' href='#')
+                  strong view all notifications                                            
+          // Messages
+          li.nav-item.dropdown
+            a#messages.nav-link(rel='nofollow' data-target='#' href='#' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+              i.fa.fa-envelope-o
+              span.badge.bg-orange 10
+            ul.dropdown-menu(aria-labelledby='notifications')
+              li
+                a.dropdown-item.d-flex(rel='nofollow' href='#')
+                  .msg-profile
+                    img.img-fluid.rounded-circle(src='/images/adminImages/avatar-1.jpg' alt='...')
+                  .msg-body
+                    h3.h5 Jason Doe
+                    span Sent You Message
+              li
+                a.dropdown-item.d-flex(rel='nofollow' href='#')
+                  .msg-profile
+                    img.img-fluid.rounded-circle(src='/images/adminImages/avatar-2.jpg' alt='...')
+                  .msg-body
+                    h3.h5 Frank Williams
+                    span Sent You Message
+              li
+                a.dropdown-item.d-flex(rel='nofollow' href='#')
+                  .msg-profile
+                    img.img-fluid.rounded-circle(src='/images/adminImages/avatar-3.jpg' alt='...')
+                  .msg-body
+                    h3.h5 Ashley Wood
+                    span Sent You Message
+              li
+                a.dropdown-item.all-notifications.text-center(rel='nofollow' href='#')
+                  strong Read all messages    
+          // Logout
+          li.nav-item
+            a.nav-link.logout(href='/logout')
+              | Logout
+              i.fa.fa-sign-out

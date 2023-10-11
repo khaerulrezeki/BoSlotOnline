@@ -1,0 +1,122 @@
+extends layout
+
+block content
+  section.font-1
+    .container
+      .row.justify-content-center
+        .col-xl-8.col-lg-10
+          h1.fs-3.fs-md-4 #{post.title}
+          .fs-0.fw-400.lead
+            | By &nbsp;
+            if post.author === 'Bo'
+              a(href='/about') #{post.author}
+            else
+              | #{post.author}
+          hr.color-9
+          .row.mb-5
+            .col-4
+              img.mr-2(src='/images/poshImages/icons/icon-time.svg' width="22")
+              - const formatedDate = h.moment(post.createdOn).format('MMM Do YYYY')
+              | #{formatedDate}
+            .col-4
+              .fa.fa-bookmark.fs-1.mr-2.color-3
+              each category in post.categories
+                | #{category}
+                if (post.categories.indexOf(category) !== post.categories.length - 1)
+                  | , &nbsp;
+              //- a(href="#") Tools
+            .col-4
+              .fa.fa-comment.fs-1.mr-2.color-3
+              - let numCom = post.comments.length
+              a(href="#") #{numCom} Comments
+          img.mb-4.radius-primary(src=`/images/uploads/postImgs/${post.photo}` alt=`${post.title} by ${post.author}`)
+  
+
+          div!= post.body
+
+
+
+
+          //- p.lead.color-5
+          //-   | Do you ever wish you had a time machine? I certainly do, but not for the usual reasons. I want a time machine so I can go back and have a frank conversation with my younger self. I’ll let you in on a bit of a secret: My younger
+          //-   | self was an idiot
+          //- p
+          //-   | I have been working on the web for over 22 years now, and I feel like I wasted so many of those years. If only I could go back and share a few hard truths with myself at the start of my career. Unfortunately, I cannot, but
+          //-   | I can share that advice with you.
+          //- blockquote.blockquote.my-5.font-2
+          //-   p.fs-2.color-4.lh-2.font-italic
+          //-     | If you want to get laid, go to college. If you want an education, go to the library.”
+          //-   footer.blockquote-footer Frank Zappa
+          //- p
+          //-   | Admittedly, you are almost certainly not as idiotic as I was. But hopefully, there will be something in this advice that inspires you. Speaking of inspiration, that leads me nicely into my first piece of wisdom!
+          //- p
+          //-   | Providing elements in two separate layers which are larger than the displayed (i.e. masked) size creates the opportunity for interesting visual treatments and animations. Exactly what effects may be applied and when is still
+          //-   | something of an open question; it is up to device and launcher makers to decide. Here are some simple examples you could imagine: parallax or pulsing by independently translating or scaling each layer before applying the
+          //-   | mask.
+          //- img.img-thumbnail.float-left.mr-4(src="/images/poshImages/portfolio/wide-04.jpg" width="50%")
+          //- p
+          //-   | I confess that, for many years, I was a bit of a job’s worth. I was a designer, and I spent much of my working life complaining because other people weren’t doing their jobs properly. Clients failed to deliver copy, developers
+          //-   | didn’t implement my designs correctly, and project managers were always putting unrealistic constraints on me.
+          //- p
+          //-   | To be fair to my younger self, these were all real problems. But I did nothing but moan about them. I made no effort to help my colleagues fix these issues. I never questioned why the client was failing to deliver content or
+          //-   | why the project manager seemed so unreasonable? I didn’t bother to understand the constraints they faced.
+          //- p
+            | When I did eventually wake up and start paying attention, I discovered a bigger world. I found out just how interconnected digital and the user experience are, and how many things beyond the screen influence the experience.
+
+
+              //- Social Sharing Buttons
+          //- .mt-4
+          //-   a.btn.btn-icon.btn-xs.facebook.btn-icon-left.mr-2(href="#")
+          //-     span.fab.fa-facebook
+          //-     |  Share
+          //-   a.btn.btn-icon.btn-xs.google-plus.btn-icon-left.mr-2(href="#")
+          //-     span.fab.fa-google-plus
+          //-     |  Plus
+          //-   a.btn.btn-icon.btn-xs.twitter.btn-icon-left(href="#")
+          //-     span.fab.fa-twitter
+          //-     |  tweet
+          hr.color-9.mt-6.mb-4
+          .row.justify-content-center.align-items-center.text-center.text-md-left
+            .col-8.col-md-3
+              - const ran = Math.floor(Math.random() * 5) + 1;
+              a(href=`/images/siteImages/authors/bo-author${ran}.JPG` data-lightbox="profile-pic")
+                img.img-thumbnail.radius-primary(src=`/images/siteImages/authors/bo-author${ran}.JPG`)
+            .col-12.col-md-9.mt-3.mt-md-0
+              h5.mb-2 #{post.author}
+              p.color-4
+                | Bo may be a newer kid on the block when it comes to formally coding awesomeness for the web, but he has operated websites for several years now. He has a passion for coding, writing, and most importantly his family.
+          hr.color-9.mt-4.mb-6
+          h4 #{numCom} Comments
+          ul.no-style.pl-0
+            each comment in post.comments
+              //- - let oddEven
+              //- if post.comments.indexOf('comment') % 2 === 0
+              //-   - let oddEven = 10
+              //- else
+              //-   - let oddEven = 11
+              li.media.p-4(class=post.comments.indexOf(comment) % 2 ? 'background-10' : 'background-11')
+                if comment.photo
+                  img.img-thumbnail.d-flex.mr-3(alt=`${comment.author}` src=`${comment.photo}` width='60')
+                else
+                  img.img-thumbnail.d-flex.mr-3(alt="Image" src='/images/siteImages/gravatar.jpeg' width="60")
+                .media-body
+                  h5.mb-0.fs-0 #{comment.author}
+                  small.color-6.fw-600
+                    - const formatedCommentDate = h.moment(comment.created).format('MMM Do YYYY')
+                    span #{formatedCommentDate}
+                  .mt-3
+                  p.fw-300!= comment.body
+          h5.mt-6 Leave a comment
+          form.mt-4.row(action=`/blog/${post.slug}/${post._id}` method='POST')
+            .col-md-6
+              input.form-control.mb-3(type='text' name='author' placeholder='Name')
+            .col-md-6
+              input.form-control.mb-3(type='email' name='authorEmail' placeholder='Email')
+            .col-12
+              textarea.form-control.mb-3(placeholder='Comment' rows='8' name='body')
+            button.btn.btn-primary.text-uppercase(type='submit') Post comment
+      // /.row
+    // /.container
+
+
+

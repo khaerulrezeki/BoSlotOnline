@@ -1,0 +1,18 @@
+
+#znav-container.znav-container.znav-white.znav-fixed.border-bottom.color-10
+  .container
+    nav.navbar.navbar-toggleable-md
+      button.navbar-toggler.navbar-toggler-right(type='button' data-toggle='collapse' data-target='#navbarNavDropdown' aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation')
+        .hamburger.hamburger--emphatic
+          .hamburger-box
+            .hamburger-inner
+      a.navbar-brand.overflow-hidden(href='/')
+        img(src='/images/siteImages/BoSlott-online-logo01222018-transBG.png' alt='logo' height='60rem')
+      #navbarNavDropdown.collapse.navbar-collapse
+        ul.navbar-nav.ml-auto
+          each item in h.menu
+            li
+              a(href=item.slug alt=`${item.title} | Bo Slott Online - Full Stack Developer`) #{item.title}
+
+  // /.container
+// /.znav-container

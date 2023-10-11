@@ -1,0 +1,115 @@
+extends layout
+
+block content
+
+  section.portfolio.text-center.font-1
+    .container
+      h1.fs-4 My Works
+      //- p.lead.color-5 Posh helps you showcase your best works.
+      hr.short.color-7
+            //- .sortable.mt-6
+            //-   .ui.selection.dropdown.mb-6(tabindex="0")
+            //-     input(type="hidden" name="catagories ")
+            //-     .text Viewing all &nbsp;
+            //-     i.fas.fa-caret-down
+            //-     .menu.transition.hidden(tabindex='-1')
+            //-       .item(data-filter="*") Viewing all
+            //-       each project in projects
+            //-         .item(data-filter=`.${project.category}`) #{project.category}
+
+              
+            //- .item(data-filter=".digital") Digital
+            //- .item(data-filter=".animation") Animation
+            //- .item(data-filter=".print") Print
+
+      .row.sortable-container.mt-5
+        each project in projects
+          .sortable-item.col-lg-6(class=`${project.category}`)
+            a(href=`/portfolio/details/${project.name}` alt=`Click here for details about ${project.slug}`)
+              .hoverbox
+                img.radius-primary(src=`/images/uploads/projectImgs/${project.photo}` alt=`Project image of ${project.name}` height='450')
+                .hoverbox-content.full-height.color-white.justify-content-center.row.align-items-center.background-1
+                  a.col.color-white(href=`/portfolio/details/${project.slug}` alt=`Click here for details about ${project.name}`)
+                    p.mb-2.d-inline-block #{project.category}
+                    br
+                    h5.d-inline-block.mt-0 #{project.name}
+                    br
+                    .btn.btn-outline-white.btn-xs.mt-4 View Details
+              .my-4
+
+          //- .sortable-item.col-lg-6.animation
+            a(href='portfolio-details.html')
+              .hoverbox
+                img.radius-primary(src='/images/poshImages/s-01.jpg')
+                .hoverbox-content.full-height.color-white.justify-content-center.row.align-items-center.background-1
+                  a.col.color-white(href='portfolio-details.html')
+                    p.mb-2.d-inline-block Website
+                    br
+                    h5.d-inline-block.mt-0 Website for Sarah and Mike
+                    br
+                    .btn.btn-outline-white.btn-xs.mt-4 View Details
+              .my-4
+          //- .sortable-item.col-lg-6.digital
+          //-   a(href='portfolio-details.html')
+          //-     .hoverbox
+          //-       img.radius-primary(src='/images/poshImages/s-02.jpg')
+          //-       .hoverbox-content.full-height.color-white.justify-content-center.row.align-items-center.background-1
+          //-         a.col.color-white(href='portfolio-details.html')
+          //-           p.mb-2.d-inline-block Design
+          //-           br
+          //-           h5.d-inline-block.mt-0 Wildlife videography of the North
+          //-           br
+          //-           .btn.btn-outline-white.btn-xs.mt-4 View Details
+          //-     .my-4
+          //- .sortable-item.col-lg-6.print
+          //-   a(href='portfolio-details.html')
+          //-     .hoverbox
+          //-       img.radius-primary(src='/images/poshImages/s-03.jpg')
+          //-       .hoverbox-content.full-height.color-white.justify-content-center.row.align-items-center.background-1
+          //-         a.col.color-white(href='portfolio-details.html')
+          //-           p.mb-2.d-inline-block Animation
+          //-           br
+          //-           h5.d-inline-block.mt-0 Design of the coolest interior furniture
+          //-           br
+          //-           .btn.btn-outline-white.btn-xs.mt-4 View Details
+          //-     .my-4
+          //- .sortable-item.col-lg-6.animation
+          //-   a(href='portfolio-details.html')
+          //-     .hoverbox
+          //-       img.radius-primary(src='/images/poshImages/s-04.jpg')
+          //-       .hoverbox-content.full-height.color-white.justify-content-center.row.align-items-center.background-1
+          //-         a.col.color-white(href='portfolio-details.html')
+          //-           p.mb-2.d-inline-block Website
+          //-           br
+          //-           h5.d-inline-block.mt-0 Tale of a natural bridge
+          //-           br
+          //-           .btn.btn-outline-white.btn-xs.mt-4 View Details
+          //-     .my-4
+          //- .sortable-item.col-lg-6.print
+          //-   a(href='portfolio-details.html')
+          //-     .hoverbox
+          //-       img.radius-primary(src='/images/poshImages/s-05.jpg')
+          //-       .hoverbox-content.full-height.color-white.justify-content-center.row.align-items-center.background-1
+          //-         a.col.color-white(href='portfolio-details.html')
+          //-           p.mb-2.d-inline-block Photography
+          //-           br
+          //-           h5.d-inline-block.mt-0 The horse race
+          //-           br
+          //-           .btn.btn-outline-white.btn-xs.mt-4 View Details
+          //-     .my-4
+          //- .sortable-item.col-lg-6.digital
+            a(href='portfolio-details.html')
+              .hoverbox
+                img.radius-primary(src='/images/poshImages/s-06.jpg')
+                .hoverbox-content.full-height.color-white.justify-content-center.row.align-items-center.background-1
+                  a.col.color-white(href='portfolio-details.html')
+                    p.mb-2.d-inline-block Animation
+                    br
+                    h5.d-inline-block.mt-0 Grizzly Bear
+                    br
+                    .btn.btn-outline-white.btn-xs.mt-4 View Details
+              .my-4
+      // /.row
+    // /.container
+
+

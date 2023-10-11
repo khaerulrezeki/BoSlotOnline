@@ -1,0 +1,50 @@
+// Side Navbar
+nav.side-navbar
+  // Sidebar Header
+  .sidebar-header.d-flex.align-items-center
+    .avatar
+      //- if user.name === 'Bo'
+      img.img-fluid.rounded-circle(src=`/images/uploads/userImgs/${user.photo}` alt='...')
+    .title
+      if user
+        h1.h4 #{user.name}
+        h1.h4 #{user.role}
+      else
+        h1.h4 Unknown User
+  // Sidebar Navidation Menus
+  span.heading Main
+  ul.list-unstyled
+    each item in h.adminNav
+      li(class=(currentPath.endsWith(item.slug) ? 'active' : ''))
+        a(href=item.slug aria-expanded=item.aria data-toggle=item.dataToggle)
+          i.material-icons #{item.icon}
+          | #{item.title}
+        if item.drops
+          ul.collapse.list-unstyled(id=`${item.itemsId}`)
+            each drop in item.drops
+              li
+                a(href=drop.dropLink)
+                  i.material-icons #{drop.dropIcon}
+                  | #{drop.dropTitle}
+    
+
+
+
+  //- span.heading Extras
+  //- ul.list-unstyled
+    li
+      a(href='#')
+        i.icon-flask
+        | Demo
+    li
+      a(href='#')
+        i.icon-screen
+        | Demo
+    li
+      a(href='#')
+        i.icon-mail
+        | Demo
+    li
+      a(href='#')
+        i.icon-picture
+        | Demo

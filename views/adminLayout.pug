@@ -1,0 +1,17 @@
+doctype html
+html(lang='en-US')
+  include includes/adminHead
+  
+  body
+    .page
+      include includes/adminTopNav
+
+      .page-content.d-flex.align-items-stretch
+        include includes/adminSideNav
+
+        .content-inner
+          block content
+    
+          include includes/adminFooter
+
+        include includes/adminScripts
